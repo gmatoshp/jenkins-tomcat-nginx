@@ -136,6 +136,8 @@ ADD pwencrypt /usr/bin/pwencrypt
 # Port 8080 will be used for the Jenkins web interface
 EXPOSE 8080 50000
 
+ADD download-docker-engine.sh download-docker-engine.sh
+RUN ./download-docker-engine.sh
 
 # Run NGINX, Tomcat, plugins.sh (to install the plugins)
 CMD ["/usr/bin/supervisord"]
