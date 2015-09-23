@@ -1,4 +1,4 @@
-#	Jenkins on tomcat + nginx
+#	Jenkins on tomcat 
 #	=========================
 #	## Description:
 #
@@ -19,8 +19,8 @@
 #
 
 
-FROM nginx:1.7.12
-MAINTAINER Jonathan Rosado <jonathan.rosado-lugo@hp.com>
+FROM ubuntu:14.04
+MAINTAINER Giovanni Matos
 
 # Version for jenkins
 # Update center for jenkins
@@ -59,7 +59,7 @@ RUN curl -L http://mirrors.jenkins-ci.org/war-stable/$JENKINS_VERSION/jenkins.wa
 RUN mkdir /tomcat/webapps/ROOT && cd /tomcat/webapps/ROOT && jar -xvf '/tomcat/webapps/ROOT.war' && cd / 
 RUN rm -rf /var/lib/apt/lists/* 
 RUN mkdir -p /tomcat/webapps/ROOT/ref/init.groovy.d 
-RUN mkdir -p /var/log/nginx/jenkins/
+#RUN mkdir -p /var/log/nginx/jenkins/
 
 # Add script for running Tomcat
 ADD run-tomcat.sh /run.sh
@@ -101,7 +101,7 @@ RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt && > /usr/share/jen
 
 
 # Add the default nginx configuration
-ADD nginx.conf /etc/nginx/nginx.conf
+#ADD nginx.conf /etc/nginx/nginx.conf
 
 
 # Add the default supervisor conf
