@@ -136,8 +136,13 @@ ADD pwencrypt /usr/bin/pwencrypt
 # Port 8080 will be used for the Jenkins web interface
 EXPOSE 8080 50000
 
+# install docker 1.6.2
 ADD download-docker-engine.sh download-docker-engine.sh
-RUN ./download-docker-engine.sh
+#RUN ./download-docker-engine.sh
+
+RUN apt-get update
+RUN wget -qO- https://get.docker.com/ubuntu/ | sed -r 's/^apt-get install -y lxc-docker$/apt-get install -y lxc-docker-1.6.2/g' | sh
+
 
 # Run NGINX, Tomcat, plugins.sh (to install the plugins)
 CMD ["/usr/bin/supervisord"]
